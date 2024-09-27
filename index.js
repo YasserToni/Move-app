@@ -13,6 +13,11 @@ const dbConnection = require("./config/dbconnection");
 const mountRoutes = require("./routes/index");
 const ApiError = require("./utils/apiError");
 const glabalError = require("./middlewares/errorMiddleware");
+const userModel = require("./model/userModel");
+const bcrypt = require("bcryptjs");
+const createToken = require("./utils/createToken");
+const { sanitizeUser } = require("./utils/sanitizData");
+const authRoute = require("./routes/authRoute");
 
 //connect with db
 dbConnection();
@@ -36,7 +41,8 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Routes
-mountRoutes(app);
+// mountRoutes(app);
+app.use("/api/v1/auth", authRoute);
 
 app.all("*", (req, res, next) => {
   // create error and send it to error handling middleware

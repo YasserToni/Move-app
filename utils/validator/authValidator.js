@@ -3,7 +3,13 @@ const userModel = require("../../model/userModel");
 const validatorMiddleware = require("../../middlewares/validatorMiddleware");
 
 exports.signValidator = [
-  check("name")
+  check("firstName")
+    .notEmpty()
+    .withMessage("firstName required")
+    .isLength({ min: 3 })
+    .withMessage("Too short name"),
+
+  check("firstName")
     .notEmpty()
     .withMessage("name required")
     .isLength({ min: 3 })
