@@ -20,11 +20,13 @@ const userSchema = new mongoose.Schema(
       unique: [true, "Email is already taken"],
       lowercase: true,
     },
+    profileImage: String,
     password: {
       type: String,
       required: [true, "Password is required"],
       minlength: [6, "Password must be at least 6  characters long"],
     },
+    bio: String,
     passwordResetCode: String,
     passwordResetExpires: Date,
     passwordResetVerified: Boolean,
@@ -38,6 +40,12 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    favorites: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Movies",
+      },
+    ],
   },
   {
     timestamps: true,

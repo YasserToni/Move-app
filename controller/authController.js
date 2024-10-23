@@ -45,7 +45,8 @@ exports.login = asyncHandler(async (req, res, next) => {
 
   // send token to user
   res.status(201).json({
-    data: sanitizeUser(user),
+    // data: sanitizeUser(user),
+    data: user,
     token,
   });
 });
@@ -143,7 +144,7 @@ exports.forgetPassword = asyncHandler(async (req, res, next) => {
 
   await user.save();
 
-  const message = `Hi ${user.name}, \n We received a request to reset the password on your School Era Account . \n ${restCode} \n Enter this cod to complete the reset.`;
+  const message = `Hi ${user.firstName} ${user.lastName}, \n We received a request to reset the password on your School Era Account . \n ${restCode} \n Enter this cod to complete the reset.`;
 
   try {
     await sendEmail({

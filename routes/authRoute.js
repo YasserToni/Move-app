@@ -19,7 +19,7 @@ const router = express.Router();
 router.route("/signup").post(signValidator, singup);
 
 // login
-router.route("/login").get(loginValidator, login);
+router.route("/login").post(loginValidator, login);
 
 router.route("/forgetpassword").post(forgetPassword);
 
